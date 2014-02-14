@@ -1,11 +1,21 @@
+import json
 import os
+import random
 import re
-import wikipedia
+import sys
 from twitter import *
+import wikipedia
 
-MY_TWITTER_CREDS = os.path.expanduser('./.genderbot_credentials')
-CONSUMER_KEY = os.environ['CONSUMER_KEY']
-CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
+if random.randrange(2) == 0: sys.exit(0)
+
+MY_TWITTER_CREDS = os.path.join(os.path.dirname(__file__), ".genderbot_credentials")
+
+env_filepath = os.path.join(os.path.dirname(__file__), ".env")
+env_file = open(env_filepath, 'r')
+env_data = json.load(env_file)
+CONSUMER_KEY = str(env_data['CONSUMER_KEY'])
+CONSUMER_SECRET = str(env_data['CONSUMER_SECRET'])
+env_file.close()
 
 if not os.path.exists(MY_TWITTER_CREDS):
   oauth_dance("CustomGender", CONSUMER_KEY, CONSUMER_SECRET, MY_TWITTER_CREDS)
