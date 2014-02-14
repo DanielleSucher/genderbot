@@ -1,0 +1,5 @@
+beautifulsoup4==4.3.2
+requests==1.2.3
+twitter==1.13.1
+wikipedia==1.1
+wsgiref==0.1.2
