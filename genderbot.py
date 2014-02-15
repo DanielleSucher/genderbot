@@ -30,7 +30,7 @@ try:
   random_article = wikipedia.page(title=random_article_title)
 
   # If it has an "is..." string, set the definition of gender and tweet about it.
-  match = re.search(unicode("is [^\.\?]+"), random_article.content, re.UNICODE)
+  match = re.search(unicode(r"\bis [^.?]+"), random_article.content, re.UNICODE)
   if match:
     status = 'gender %s' % (match.group(0))
     if len(status) > 114: status = status[0:113] + '...'
