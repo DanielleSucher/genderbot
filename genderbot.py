@@ -1,4 +1,3 @@
-import random
 import re
 from twitterbot import TwitterBot
 import wikipedia
