@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 import re
 from twitterbot import TwitterBot
 import wikipedia
@@ -14,7 +15,7 @@ class Genderbot(TwitterBot):
   def tweet(self):
     article = self.__random_wikipedia_article()
     match = re.search(r"\bis [^.?]+", article.content, re.UNICODE)
-    if match:
+    if match and self.__not_person(article):
       status = self.__format_status(match.group(0), article.url)
       if self.__is_interesting(status):
         self.post_tweet(status)
@@ -28,6 +29,10 @@ class Genderbot(TwitterBot):
     flags = re.UNICODE | re.IGNORECASE
     boring = re.search(Genderbot.boring_regex, status, flags)
     return boring is None
+
+  def __not_person(self, article):
+    parsed = BeautifulSoup(article.html())
+    return parsed.find("th", text="Born") is None
 
   def __random_wikipedia_article(self):
     random_title = wikipedia.random(pages=1)
