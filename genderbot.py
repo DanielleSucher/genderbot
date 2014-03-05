@@ -4,10 +4,12 @@ import wikipedia
 
 
 class Genderbot(TwitterBot):
-  boring_article_regex = (r"municipality|village|town|football|genus|family|"
-                           "administrative|district|community|region|hamlet|"
-                           "school|actor|mountain|basketball|city|species|film|"
-                           "county|located|politician|professional|settlement")
+  boring_regex = (r"municipality|village|town|football|genus|family|"
+                   "administrative|district|community|region|hamlet|"
+                   "school|actor|mountain|basketball|city|species|film|"
+                   "county|located|politician|professional|settlement|"
+                   "river|lake|province|replaced|origin|band|park|song"
+                   "approximately|north|south|east|west|business")
 
   def tweet(self):
     article = self.__random_wikipedia_article()
@@ -23,8 +25,9 @@ class Genderbot(TwitterBot):
     return status + ' %s' % (url)
 
   def __is_interesting(self, status):
-    boring_match = re.search(Genderbot.boring_article_regex, status, re.UNICODE)
-    return boring_match is None
+    flags = re.UNICODE | re.IGNORECASE
+    boring = re.search(Genderbot.boring_regex, status, flags)
+    return boring is None
 
   def __random_wikipedia_article(self):
     random_title = wikipedia.random(pages=1)
