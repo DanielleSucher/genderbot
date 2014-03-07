@@ -10,7 +10,7 @@ class Genderbot(TwitterBot):
                    "school|actor|mountain|basketball|city|species|film|"
                    "county|located|politician|professional|settlement|"
                    "river|lake|province|replaced|origin|band|park|song"
-                   "approximately|north|south|east|west|business")
+                   "approximately|north|south|east|west|business|\bby\b")
 
   def tweet(self):
     article = self.__random_wikipedia_article()
