@@ -6,11 +6,11 @@ import wikipedia
 
 class Genderbot(TwitterBot):
   boring_regex = (r"municipality|village|town|football|genus|family|"
-                   "administrative|district|community|region|hamlet|"
-                   "school|actor|mountain|basketball|city|species|film|"
-                   "county|located|politician|professional|settlement|"
-                   "river|lake|province|replaced|origin|band|park|song"
-                   "approximately|north|south|east|west|business|\bby\b")
+                  r"administrative|district|community|region|hamlet|"
+                  r"school|actor|mountain|basketball|city|species|film|"
+                  r"county|located|politician|professional|settlement|"
+                  r"river|lake|province|replaced|origin|band|park|song"
+                  r"approximately|north|south|east|west|business|\bby\b")
 
   def tweet(self):
     article = self.__random_wikipedia_article()
